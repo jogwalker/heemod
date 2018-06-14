@@ -71,13 +71,22 @@ r_lognormal <- function(meanlog, sdlog) {
   function(x) stats::qlnorm(p = x, meanlog = meanlog, sdlog = sdlog)
 }
 
+###' @rdname distributions
+# gamma <- function(mean, sd) {
+#   list(r_gamma(mean^2/sd^2, sd^2/mean))
+# }
+# make_gamma <- function(...) {
+#   warning("'make_gamma()' is deprecated, use 'gamma()' instead.")
+#   gamma(...)
+# }
+# r_gamma <- function(shape, scale) {
+#   function(x) stats::qgamma(p = x, shape = shape, scale = scale)
+# }
+
+# make new gamma function
 #' @rdname distributions
-gamma <- function(mean, sd) {
-  list(r_gamma(mean^2/sd^2, sd^2/mean))
-}
-make_gamma <- function(...) {
-  warning("'make_gamma()' is deprecated, use 'gamma()' instead.")
-  gamma(...)
+gamma <- function(shape, rate) {
+  list(r_gamma(shape=shape,scale=1/rate))
 }
 r_gamma <- function(shape, scale) {
   function(x) stats::qgamma(p = x, shape = shape, scale = scale)
